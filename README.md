@@ -2,9 +2,9 @@
 
 Quick python3 plugin to retrieve the protein backbone from a PDB file.
 
-Developed by Eduardo Ocampo L E
-On December 1st 2019
-MIT License
+- Developed by Eduardo Ocampo L E
+- On December 1st 2019
+- MIT License
 
 ## Usage:
 
