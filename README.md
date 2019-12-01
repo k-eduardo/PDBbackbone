@@ -9,6 +9,6 @@ MIT License
 ## Usage:
 `
 pip3 install --user -r requirements.txt
-\n
+
 python3 readPDB.py
 `
