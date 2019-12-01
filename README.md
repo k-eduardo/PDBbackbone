@@ -8,7 +8,7 @@ MIT License
 
 ## Usage:
 
-1. -Put all your .PDB files on the folder *data*.
+1. Put all your .PDB files on the folder *data*.
 2.
 ```
 pip3 install --user -r requirements.txt
