@@ -28,19 +28,23 @@ for file in files:
             try:
                 line = line.replace('  ',' ')
                 words = line.split(' ')
-                atom = words[2]
-                newline = [words[0],words[1],words[2],words[6],words[7],words[8]]
-                if atom == 'N':
-                    cbackbone.append(newline)
-                elif atom == 'CA' and len(cbackbone) > 0:
-                    cbackbone.append(newline)
-                elif atom == 'C' and len(cbackbone) > 1:
-                    cbackbone.append(newline)
-                    for element in cbackbone:
-                        backbone.append(element)
-                    cbackbone = []
-                else:
-                    cbackbone = []
+                words = list(filter(lambda a: a!= ' ',words))
+                words = list(filter(lambda a: a!= '\n',words))
+                words = list(filter(None,words))
+                if words[0] == 'ATOM':
+                    atom = words[2]
+                    newline = [words[0],words[1],words[2],words[6],words[7],words[8]]
+                    if atom == 'N':
+                        cbackbone.append(newline)
+                    elif atom == 'CA' and len(cbackbone) > 0:
+                        cbackbone.append(newline)
+                    elif atom == 'C' and len(cbackbone) > 1:
+                        cbackbone.append(newline)
+                        for element in cbackbone:
+                            backbone.append(element)
+                        cbackbone = []
+                    else:
+                        cbackbone = []
             except Exception as e:
                 if str(e) != 'list index out of range':
                     print('error al insertar línea')
