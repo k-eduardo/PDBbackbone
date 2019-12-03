@@ -1,9 +1,11 @@
 '''
+
 Quick python3 plugin to retrive the protein backbone from a PDB file.
 
 Developed by Eduardo Ocampo L E
 On December 1st 2019
 MIT Licensed
+
 '''
 
 from e import array2csv,files2array
@@ -24,6 +26,7 @@ for file in files:
     try:
         print('loading file '+file)
         f = open(file,'r')
+        backbone = []
         for line in f:
             try:
                 line = line.replace('  ',' ')
@@ -51,8 +54,10 @@ for file in files:
                     print(e)
                 else:
                     pass
+        print('Outing file '+file)
         outname = 'out/' + Path(file).stem + '.csv'
         array2csv(outname,backbone)
+        print('done outing')
         print('file '+file+' processed correctly and outcome saved to: '+outname+'\n')
     except Exception as e:
         if str(e) != 'list index out of range':
