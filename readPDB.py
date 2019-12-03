@@ -26,7 +26,8 @@ for file in files:
         f = open(file,'r')
         for line in f:
             try:
-                words = line.split('  ')
+                line = line.replace('  ',' ')
+                words = line.split(' ')
                 atom = words[2]
                 newline = [words[0],words[1],words[2],words[6],words[7],words[8]]
                 if atom == 'N':
