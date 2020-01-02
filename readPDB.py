@@ -21,7 +21,7 @@ backbone of the protein and write it on the out folder with the format:\n \
 type, sequence id, atom, x coord, y coord, z coord\n \
 if you wish another outcome format, contact the developer\n\n')
 
-ei = eim1 = eim2 = []
+ei = eim1 = eim2 = [0,0,0]
 boundangle = 0.
 dihedricangle = 0.
 
@@ -40,6 +40,7 @@ for file in files:
         cbackbone = []
         backbone = []
         trigger = False
+        section = 1
         for line in f:
             try:
                 line = line.replace('  ',' ')
@@ -51,7 +52,7 @@ for file in files:
                     atom = words[2]
                     eim2 = eim1
                     eim1 = ei
-                    ei = [float(words[6]),float(words[7]),float(words[8])]
+                    ei = [float(words[6]),float(words[7]),float(words[8])] - eim1
                     if trigger:
                         try:
                             boundangle = np.arccos(np.dot(eim1,eim2)/(LA.norm(eim1)*LA.norm(eim2)))
@@ -76,17 +77,19 @@ for file in files:
                         cbackbone = []
                     else:
                         cbackbone = []
+                elif  words[0] == 'TER':
+                    print('Outing file '+file)
+                    outname = 'out/' + Path(file).stem + str(section) + '.csv'
+                    array2csv(outname,backbone)
+                    print('done outing')
+                    print('file '+file+' processed correctly and outcome saved to: '+outname+'\n')
+                    section += 1
             except Exception as e:
                 if str(e) != 'list index out of range':
                     print('error al insertar línea')
                     print(e)
                 else:
                     pass
-        print('Outing file '+file)
-        outname = 'out/' + Path(file).stem + '.csv'
-        array2csv(outname,backbone)
-        print('done outing')
-        print('file '+file+' processed correctly and outcome saved to: '+outname+'\n')
     except Exception as e:
         if str(e) != 'list index out of range':
             print("error on file " + file)
